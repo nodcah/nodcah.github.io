@@ -1,0 +1,56 @@
+/* Universal Styling (can be easily overwriten) */
+
+hr {
+    width: 30%;
+    margin-bottom: 0px;
+}
+body {}
+html {
+    font-size: 16px;
+}
+
+/* Add more styling for entire tags*/
+
+
+/* Site Title*/
+
+.siteTitle {
+    background: black;
+    color: white;
+    font-size: 2rem;
+    display: block;
+    text-align: center;
+    padding-top: 15px;
+    line-height: 1.1;
+}
+
+/* Navigation Bar */
+
+.nav-wrapper {
+    display: inline-block;
+}
+nav {
+    width: 100%;
+    text-align: center;
+}
+.dropdown-content li>a {
+    color: black;
+    font-size: 1rem;
+}
+
+/* Page Title */
+
+
+/* Slideshow */
+
+
+/* Page Contents */
+
+
+/* ==Needs to be broken up more with comments== */
+
+
+/* Disclaimer */
+
+
+/* Footer */
