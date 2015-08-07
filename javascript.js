@@ -28,6 +28,7 @@ $(document).ready(function () {
     //mobileSidebar
     $('.button-collapse').sideNav({
         'edge': 'left',
+        menuWidth: '275'
 
     });
     //collapsibleSidebar
