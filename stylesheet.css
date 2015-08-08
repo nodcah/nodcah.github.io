@@ -1,8 +1,8 @@
 /* Universal Styling (can be easily overwriten) */
 
-hr {
-    width: 30%;
-    margin-bottom: 0px;
+hr {}
+header {
+    background-color: black;
 }
 body {}
 html {
@@ -22,6 +22,10 @@ html {
     text-align: center;
     padding-top: 15px;
     line-height: 1.1;
+}
+.siteTitle hr {
+    width: 370px;
+    margin-bottom: 0px;
 }
 
 /* Navigation Bar */
