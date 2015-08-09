@@ -34,3 +34,21 @@ $(document).ready(function () {
     //collapsibleSidebar
     $('.collapsible').collapsible();
 });
+
+//sticky nav bar
+window.onscroll = changePos;
+
+function changePos() {
+    document.getElementById("foo").innerHTML = document.getElementById("foo").innerHTML + 1;
+    var header = document.getElementById("navbar");
+    if ((window.pageYOffset > 103 && window.innerWidth > 992) {
+            header.style.position = "relative";
+            header.style.top = (window.pageYOffset - 103) + "px";
+        } else if (window.innerWidth <= 992) {
+            header.style.position = "relative";
+            header.style.top = window.pageYOffset + "px";
+        } else {
+            header.style.position = "relative";
+            header.style.top = "0px";
+        }
+    }
