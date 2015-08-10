@@ -37,6 +37,9 @@ nav {
     width: 100%;
     text-align: center;
 }
+#navbar {
+    position: relative;
+}
 .dropdown-content li>a {
     color: black;
     font-size: 1rem;
