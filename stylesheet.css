@@ -54,6 +54,7 @@ nav {
 
 /* Slideshow in SuperSimpleSlidshow/sss.css */
 
+
 /* Page Contents */
 
 
@@ -67,11 +68,15 @@ nav {
     font-size: .65rem;
     text-align: center;
 }
+.card {
+    margin-bottom: 12px
+}
 
 /* Footer */
 
 footer.page-footer {
     padding-top: 0px;
+    margin-top: 0px
 }
 footer.page-footer .footer-copyright {
     font-size: .75rem;
