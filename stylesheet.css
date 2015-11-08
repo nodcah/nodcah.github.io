@@ -53,10 +53,10 @@ nav {
     margin-bottom: 15px;
 }
 
-/* Slideshow in SuperSimpleSlidshow/sss.css */
+/* pictures */
 
-.sss {
-    height: 100%;
+img {
+    width: 100%;
 }
 
 /* Page Contents */
