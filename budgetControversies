@@ -1,16 +1,5 @@
 <!doctype html>
 <html>
-
-<!--
-<<<<<<< HEAD
--center page title and css it
--make pages based on doc
--make slideshow
--look at their fb page and see whats up
--add content
->>>>>>> origin/master
--->
-
 <head>
     <title>WHTA Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -79,7 +68,7 @@
     </header>
     <div class="container" style="height:100%;">
         <div class="row">
-            <div class="col s8 offset-s2">
+            <div class="col s10 offset-s1">
                 <div class="card-panel">WELCOME</div>
 
             </div>

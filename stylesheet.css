@@ -50,6 +50,7 @@ nav {
 .card-panel {
     text-align: center;
     font-size: 1rem;
+    margin-bottom: 15px;
 }
 
 /* Slideshow */
@@ -57,6 +58,9 @@ nav {
 
 /* Page Contents */
 
+.pageContent {
+    padding: 20px;
+}
 
 /* Disclaimer */
 
