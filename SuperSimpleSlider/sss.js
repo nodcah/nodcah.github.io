@@ -10,9 +10,9 @@
         var settings = $.extend({
             slideShow: true, // Set to false to prevent SSS from automatically animating.
             startOn: 0, // Slide to display first. Uses array notation (0 = first slide).
-            transition: 400, // Length (in milliseconds) of the fade transition.
-            speed: 3500, // Slideshow speed in milliseconds.
-            showNav: true // Set to false to hide navigation arrows.
+            transition: 1000, // Length (in milliseconds) of the fade transition.
+            speed: 5000, // Slideshow speed in milliseconds.
+            showNav: false // Set to false to hide navigation arrows.
         }, options);
 
         return this.each(function () {
@@ -43,8 +43,8 @@
 
             // Animate Slider
 
-            function get_height(target) {
-                return ((slides.eq(target).height() / slider.width()) * 100) + '%';
+            function get_width(target) {
+                return ((slides.eq(target).width() / slider.height()) * 100) + '%';
             }
 
             function animate_slide(target) {
@@ -56,13 +56,11 @@
                     slides.not(target_slide).fadeOut(transition);
 
                     slider.animate({
-                        paddingBottom: get_height(target)
+                        paddingleft: get_width(target)
                     }, transition, function () {
                         animating = false;
                     });
-
                     reset_timer();
-
                 }
             };
 
@@ -89,27 +87,10 @@
 
             $(window).load(function () {
 
-                slider.css({
-                    paddingBottom: get_height(target)
-                }).click(function (e) {
-                    clicked = $(e.target);
-                    if (clicked.is(next)) {
-                        next_slide()
-                    } else if (clicked.is(prev)) {
-                        prev_slide()
-                    }
-                });
 
                 animate_slide(target);
 
-                $(document).keydown(function (e) {
-                    key = e.keyCode;
-                    if (key === 39) {
-                        next_slide()
-                    } else if (key === 37) {
-                        prev_slide()
-                    }
-                });
+
 
             });
             // End
