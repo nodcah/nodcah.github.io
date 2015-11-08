@@ -1,21 +1,39 @@
 <!doctype html>
 <html>
 
+<!--
+-center page title and css it
+-make pages based on doc
+-make slideshow
+-look at their fb page and see whats up
+
+-->
+
 <head>
     <title>WHTA Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--Import jQuery, materialize.js, materialize.css and materialize icons-->
+    <!--Import jQuery, materialize.js, materialize.css, materialize icons, and Super Simple Sliders stuff-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="./SuperSimpleSlider/sss.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="SuperSimpleSlider/sss.js" type="text/javascript"></script>
     <!-- Give our CSS document precedence by linking it last-->
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
 
     <!--Actually import the javascript document-->
     <script src="javascript.js"></script>
+
+    <!-- Initiate Slideshow-->
+    <script>
+        jQuery(function($) {
+            $('.slider').sss();
+        });
+
+    </script>
+
 </head>
 
 <body>
@@ -67,10 +85,13 @@
             </ul>
         </div>
     </header>
-    <div class="container">
-        <div class="col s8 offset-s2">
-            <div class="card-panel">Budget Controversies</div>
+    <div class="container" style="height:100%;">
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <div class="card-panel">BUDGET CONTROVERSIES</div>
+            </div>
         </div>
+
     </div>
     <div class="container col m12" style="width:100%;">
         <div class="pageContent">
@@ -83,7 +104,7 @@
     <div class="card grey lighten-2" style="width:100%;">
         <div class="card-content">
             <div class="card-title" style="font-size:1rem; line-height:30px;text-shadow:0px 0px 4px #BBB">Web Site Disclaimer</div>
-            <p class="grey-text text-darken-1" stsyle="font-size:.5rem;">These materials have been prepared by the West Hartford Taxpayers Association for informational purposes only and are not intended and should not be construed as any type of advice. Internet subscribers and on-line readers should not act upon this information without seeking professional advice or independent verification. Every effort is made to include accurate and up-to-date information on this web site; however, the WHTA takes no legal responsibility for the information provided or found. The WHTA takes no legal responsibility for any acts taken as a consequence of the information provided on this web site nor for any loss or damage resulting from this information. Any opinions expressed on this site are those of the author and are not necessarily those of the WHTA.
+            <p class="grey-text text-darken-1" style="font-size:.5rem;">These materials have been prepared by the West Hartford Taxpayers Association for informational purposes only and are not intended and should not be construed as any type of advice. Internet subscribers and on-line readers should not act upon this information without seeking professional advice or independent verification. Every effort is made to include accurate and up-to-date information on this web site; however, the WHTA takes no legal responsibility for the information provided or found. The WHTA takes no legal responsibility for any acts taken as a consequence of the information provided on this web site nor for any loss or damage resulting from this information. Any opinions expressed on this site are those of the author and are not necessarily those of the WHTA.
             </p>
         </div>
     </div>
