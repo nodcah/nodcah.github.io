@@ -1,7 +1,7 @@
 /* Universal Styling (can be easily overwriten) */
 
-hr {}
-
+p {
+    margin: 0px;
 }
 header {
     background-color: black;
@@ -13,7 +13,9 @@ html {
 
 /* Add more styling for entire tags*/
 
+
 /* Site Title*/
+
 .siteTitle {
     background: black;
     color: white;
@@ -29,6 +31,7 @@ html {
 }
 
 /* Navigation Bar */
+
 .nav-wrapper {
     display: inline-block;
 }
@@ -45,23 +48,31 @@ nav {
 }
 
 /* Page Title */
+
 .card-panel {
     text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    margin-top: 15px;
 }
 
 /* pictures */
+
 img {
     width: 100%;
 }
 
 /* Page Contents */
-p {
-    margin: 0px;
+
+.bodyText {
+    font-size: 1.15em;
+}
+.letterHeader {
+    font-size: 1.2em;
 }
 
 /* Disclaimer */
+
 .card-content {
     padding: 10px !important;
 }
@@ -70,6 +81,7 @@ p {
 }
 
 /* Footer */
+
 footer.page-footer {
     padding-top: 0px;
     margin-top: 0px;
