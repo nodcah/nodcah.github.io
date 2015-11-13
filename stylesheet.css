@@ -41,6 +41,7 @@ nav {
 }
 #navbar {
     position: relative;
+    z-index: 1001
 }
 .dropdown-content li>a {
     color: black;
