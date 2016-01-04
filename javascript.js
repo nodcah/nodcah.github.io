@@ -40,13 +40,14 @@ window.onscroll = changePos;
 
 function changePos() {
     //document.getElementById("foo").innerHTML = document.getElementById("foo").innerHTML + 1;
-    var navbar = document.getElementById("navbar");
+    var navbar = document.getElementById("navbar, mobileNav");
     if (window.pageYOffset > 103 && window.innerWidth > 992) {
         navbar.style.top = (window.pageYOffset - 103) + "px";
-    } else if (window.innerWidth <= 992) {
-        navbar.style.top = navbar.pageYOffset + "px";
-    } else {
-        navbar.style.top = "0px";
+        //  } else if (window.innerWidth <= 992) {
+        //     navbar.style.top = navbar.pageYOffset + "px";
+        //  }
+        else {
+            navbar.style.top = navbar.pageYOffset + "px";
+            // navbar.style.top = "0px";
+        }
     }
-}
-
