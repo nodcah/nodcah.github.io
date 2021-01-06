@@ -1,14 +1,14 @@
 /* Universal Styling (can be easily overwriten) */
 
+html {
+  font-size: 16px;
+}
 p {
-  margin: 0px;
+  font-size: 1rem;
+  /*line-height: 2rem;*/
 }
 header {
   background-color: black;
-}
-body {}
-html {
-  font-size: 16px;
 }
 hr.white_fancy {
   border: 0;
@@ -23,20 +23,25 @@ hr.black_fancy {
 
 /* Add more styling for entire tags*/
 
+i.material-icons {
+  display: inline;
+}
 nav ul a,
 nav .brand-logo {
   color: #444;
 }
-p {
-  line-height: 2rem;
-}
 .sidenav-trigger {
   color: #26a69a;
+}
+
+/* Bio section */
+
+#mainname {
+  margin-bottom: 0rem;
 }
 .parallax-container {
   min-height: 380px;
   line-height: 0;
-  height: auto;
   color: rgba(255, 255, 255, .9);
 }
 .parallax-container .section {
