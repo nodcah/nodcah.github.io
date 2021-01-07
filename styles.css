@@ -10,17 +10,6 @@ p {
 header {
   background-color: black;
 }
-h3 {}
-hr.white_fancy {
-  border: 0;
-  height: 2px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
-}
-hr.black_fancy {
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(to right, rgba(150, 150, 150, 0), rgba(150, 150, 150, 0.75), rgba(150, 150, 150, 0.9), rgba(150, 150, 150, 0.75), rgba(150, 150, 150, 0));
-}
 
 /* Add more styling for entire tags*/
 
@@ -29,13 +18,16 @@ nav .brand-logo {
   color: #444;
 }
 .sidenav-trigger {
-  $('#name').text color: #26a69a;
+  color: #26a69a;
 }
 
 /* Bio section */
 
 #mainname {
   margin-bottom: 0rem;
+}
+#profilepic {
+  height: auto;
 }
 .parallax-container {
   min-height: 380px;
@@ -59,12 +51,6 @@ nav .brand-logo {
     top: 0;
   }
 }
-.icon-block {
-  padding: 0 15px;
-}
-.icon-block .material-icons {
-  font-size: inherit;
-}
 footer.page-footer {
   margin: 0;
 }
@@ -77,6 +63,14 @@ footer.page-footer {
   -moz-animation: fadeIn 2s;
   -o-animation: fadeIn 2s;
   -ms-animation: fadeIn 2s;
+}
+.fadeout {
+  animation: fadeOut 1s;
+  -webkit-animation: fadeOut 1s;
+  -moz-animation: fadeOut 1s;
+  -o-animation: fadeOut 1s;
+  -ms-animation: fadeOut 1s;
+  opacity: 0;
 }
 @keyframes fadeIn {
   0% {
@@ -116,5 +110,45 @@ footer.page-footer {
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-o-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-ms-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

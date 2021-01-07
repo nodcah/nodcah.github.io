@@ -26,9 +26,11 @@ function checkScroll() {
   if (isAtTopOfPage && $$.window.scrollTop() > 170) { //$('#mainname').position().top+$('#mainname').height()) {
     $$.navName.text('Noah Del Coro');
     $$.navName.addClass('fadein');
+    $$.navName.removeClass('fadeout');
     isAtTopOfPage = false;
   } else if (!isAtTopOfPage && $$.window.scrollTop() < 170) { //$('#mainname').position().top+$('#mainname').height()) {
-    $$.navName.text('');
+    //    $$.navName.text('');
+    $$.navName.addClass('fadeout');
     $$.navName.removeClass('fadein');
     isAtTopOfPage = true;
   }
