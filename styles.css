@@ -5,11 +5,12 @@ html {
 }
 p {
   font-size: 1rem;
-  /*line-height: 2rem;*/
+  line-height: 1.4rem;
 }
 header {
   background-color: black;
 }
+h3 {}
 hr.white_fancy {
   border: 0;
   height: 2px;
@@ -23,15 +24,12 @@ hr.black_fancy {
 
 /* Add more styling for entire tags*/
 
-i.material-icons {
-  display: inline;
-}
 nav ul a,
 nav .brand-logo {
   color: #444;
 }
 .sidenav-trigger {
-  color: #26a69a;
+  $('#name').text color: #26a69a;
 }
 
 /* Bio section */
@@ -52,12 +50,12 @@ nav .brand-logo {
     position: absolute;
     top: 40%;
   }
-  #index-banner .section {
+  #bio .section {
     top: 10%;
   }
 }
 @media only screen and (max-width: 600px) {
-  #index-banner .section {
+  #bio .section {
     top: 0;
   }
 }
@@ -69,4 +67,54 @@ nav .brand-logo {
 }
 footer.page-footer {
   margin: 0;
+}
+
+/* Animations */
+
+.fadein {
+  animation: fadeIn 2s;
+  -webkit-animation: fadeIn 2s;
+  -moz-animation: fadeIn 2s;
+  -o-animation: fadeIn 2s;
+  -ms-animation: fadeIn 2s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
