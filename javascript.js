@@ -24,7 +24,7 @@ var isAtTopOfPage = false;
 function checkScroll() {
   //console.log($(window).scrollTop())
   if (isAtTopOfPage && $$.window.scrollTop() > 170) { //$('#mainname').position().top+$('#mainname').height()) {
-    $$.navName.text('Noah Del Coro');
+    $$.navName.html('Noah&nbsp;Del&nbsp;Coro');
     $$.navName.addClass('fadein');
     $$.navName.removeClass('fadeout');
     isAtTopOfPage = false;
