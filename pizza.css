@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+.game-container {
+    text-align: center;
+}
+
+.pizza-container {
+    margin: 20px 0;
+}
+
+#pizza {
+    width: 200px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#pizza.flipped {
+    transform: scaleX(-1);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

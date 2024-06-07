@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Some Pizzas!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .pizza-step {
+            display: none;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #000;
+            width: 300px;
+            height: 300px;
+            position: relative;
+            user-select: none;
+        }
+        #knead, #sauce, #cheese, #bake {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid #000;
+            width: 300px;
+            height: 300px;
+        }
+        #message {
+            font-size: 20px;
+            padding-top: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .pizza-image {
+            width: 100%;
+            height: 100%;
+        }
+        .pizza-counter {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+        }
+        .pizza-counter div {
+            width: 50px;
+            height: 50px;
+            margin: 0 10px;
+            background: url('assets/pizza.png') no-repeat center/cover;
+            opacity: 0.3;
+        }
+        .pizza-counter div.completed {
+            opacity: 1;
+        }
+        #congratulations-container {
+            display: none;
+            margin-top: 120px;
+            text-align: center;
+        }
+        #congratulations {
+            display: block;
+            margin: 0 auto;
+        }
+        .center {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        #password-form {
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #000;
+            width: 300px;
+        }
+        #game-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="password-form">
+        <p>Please enter the password to start the game:</p>
+        <input id="password-input" type="number">
+        <button id="submit-password">Submit</button>
+    </div>
+    <div id="game-container">
+        <h1>Make Some Pizzas!</h1>
+        <h3>The Minigame</h3>
+        <div id="knead" class="pizza-step">
+            <img id="knead-image" class="pizza-image" src="assets/dough.jpeg" alt="Knead Dough">
+            <p>Drag to knead dough</p>
+        </div>
+        <div id="sauce" class="pizza-step">
+            <img id="sauce-image" class="pizza-image" src="assets/sauce.jpeg" alt="Add Sauce">
+            <p>Keep clicking to add sauce</p>
+        </div>
+        <div id="cheese" class="pizza-step">
+            <img id="cheese-image" class="pizza-image" src="assets/cheese.jpeg" alt="Add Cheese">
+            <p>Keep clicking to sprinkle cheese</p>
+        </div>
+        <div id="bake" class="pizza-step">
+            <img id="bake-image" class="pizza-image" src="assets/baking.jpeg" alt="Bake Pizza">
+            <p>Hold to bake pizza</p>
+        </div>
+        <div id="message">Let's start making a pizza!</div>
+        <div class="pizza-counter">
+            <div id="pizza1"></div>
+            <div id="pizza2"></div>
+            <div id="pizza3"></div> <br/>
+        </div>
+        <div id="congratulations-container" class="center">
+            <img id="congratulations" width="300px" src="assets/pizzas.jpg" alt="Congratulations">
+            <p>Next, look around for a little note that we used to leave each other.<br/><br/><i style="font-size: 60%;">Hint: it's underneath something round.</i></p>
+        </div>
+    </div>  
+    <script>
+        const correctPassword1 = "4"; // Set your password here
+        const correctPassword2 = "4.5"; // Set your password here
+        document.getElementById('submit-password').addEventListener('click', () => {
+            const enteredPassword = document.getElementById('password-input').value;
+            if (enteredPassword === correctPassword1 || enteredPassword === correctPassword2) {
+                document.getElementById('password-form').style.display = 'none';
+                document.getElementById('game-container').style.display = 'block';
+                startNextStage();
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        });
+
+        let stage = 0;
+        let pizzasMade = 0;
+        let sauceClicks = 0;
+        let cheeseClicks = 0;
+        let bakeProgress = 0;
+
+        function startNextStage() {
+            document.getElementById('knead').style.display = 'none';
+            document.getElementById('sauce').style.display = 'none';
+            document.getElementById('cheese').style.display = 'none';
+            document.getElementById('bake').style.display = 'none';
+
+            if (stage === 0) {
+                document.getElementById('knead').style.display = 'block';
+                // document.getElementById('message').innerText = 'Drag to knead the dough.';
+            } else if (stage === 1) {
+                sauceClicks = 0;
+                document.getElementById('sauce').style.display = 'block';
+                document.getElementById('message').innerText = '\n';
+            } else if (stage === 2) {
+                cheeseClicks = 0;
+                document.getElementById('cheese').style.display = 'block';
+                // document.getElementById('message').innerText = 'Click to sprinkle cheese on the pizza.';
+            } else if (stage === 3) {
+                bakeProgress = 0;
+                document.getElementById('bake').style.display = 'block';
+                // document.getElementById('message').innerText = 'Hold to bake the pizza.';
+            }
+        }
+
+        function updatePizzaCounter() {
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById(`pizza${i}`).classList.remove('completed');
+            }
+            for (let i = 1; i <= pizzasMade; i++) {
+                document.getElementById(`pizza${i}`).classList.add('completed');
+            }
+        }
+
+        document.getElementById('knead').addEventListener('mousedown', () => {
+            let kneading = false;
+            function knead(e) {
+                if (kneading) {
+                    document.getElementById('message').innerText = 'Dough kneaded! Now, put sauce on the pizza.';
+                    document.removeEventListener('mousemove', knead);
+                    kneading = false;
+                    stage++;
+                    startNextStage();
+                }
+            }
+            kneading = true;
+            document.addEventListener('mousemove', knead);
+            document.addEventListener('mouseup', () => {
+                kneading = false;
+                document.removeEventListener('mousemove', knead);
+            }, { once: true });
+        });
+
+        document.getElementById('sauce').addEventListener('click', () => {
+            sauceClicks++;
+            if (sauceClicks >= 5) {
+                // document.getElementById('message').innerText = 'Sauce added! Now, put cheese on the pizza.';
+                stage++;
+                startNextStage();
+            }
+        });
+
+        document.getElementById('cheese').addEventListener('click', () => {
+            cheeseClicks++;
+            if (cheeseClicks >= 5) {
+                // document.getElementById('message').innerText = 'Cheese added! Now, bake the pizza.';
+                stage++;
+                startNextStage();
+            }
+        });
+
+        document.getElementById('bake').addEventListener('mousedown', () => {
+            let baking = true;
+            function bake() {
+                if (baking) {
+                    bakeProgress++;
+                    if (bakeProgress >= 100) {
+                        pizzasMade++;
+                        updatePizzaCounter();
+                        stage = 0;
+                        if (pizzasMade < 3) {
+                            document.getElementById('message').innerText = `Pizza baked! You have made ${pizzasMade} pizzas. Make another one!`;
+                            startNextStage();
+                        } else {
+                            document.getElementById('message').innerText = 'Congratulations! You have made 3 pizzas!';
+                            document.getElementById('congratulations-container').style.display = 'block';
+                            document.getElementById('knead').style.display = 'none';
+                            document.getElementById('sauce').style.display = 'none';
+                            document.getElementById('cheese').style.display = 'none';
+                            document.getElementById('bake').style.display = 'none';
+                        }
+                        baking = false;
+                    } else {
+                        document.getElementById('message').innerText = `Baking... ${bakeProgress}%`;
+                        setTimeout(bake, 50);
+                    }
+                }
+            }
+            bake();
+            document.addEventListener('mouseup', () => {
+                baking = false;
+            }, { once: true });
+        });
+
+        startNextStage();
+    </script>
+</body>
+</html>
