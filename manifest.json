@@ -1,0 +1,28 @@
+{
+  "name": "Interval Timer",
+  "short_name": "Timer",
+  "description": "A simple and beautiful interval timer for workouts",
+  "start_url": "/timer.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2196F3",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "fitness"],
+  "screenshots": [],
+  "prefer_related_applications": false
+}
+
