@@ -137,38 +137,99 @@ class IntervalTimer {
   setupAudio() {
     try {
       this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // On iOS, we need to unlock audio with a user interaction
+      // Create a silent buffer to unlock audio context
+      const buffer = this.audioContext.createBuffer(1, 1, 22050);
+      const source = this.audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(this.audioContext.destination);
+      source.start(0);
+      
+      // Resume audio context if suspended (iOS requirement)
+      if (this.audioContext.state === 'suspended') {
+        this.audioContext.resume();
+      }
     } catch (e) {
       console.warn('Audio context not supported:', e);
     }
   }
   
   playBeep(frequency = 800, duration = 200) {
-    if (!this.settings.soundEnabled || !this.audioContext) return;
+    if (!this.settings.soundEnabled) return;
     
-    const oscillator = this.audioContext.createOscillator();
-    const gainNode = this.audioContext.createGain();
+    // Ensure audio context exists and is running
+    if (!this.audioContext) {
+      this.setupAudio();
+    }
     
-    oscillator.connect(gainNode);
-    gainNode.connect(this.audioContext.destination);
+    if (!this.audioContext) return;
     
-    oscillator.frequency.value = frequency;
-    oscillator.type = 'sine';
-    
-    gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + duration / 1000);
-    
-    oscillator.start(this.audioContext.currentTime);
-    oscillator.stop(this.audioContext.currentTime + duration / 1000);
+    // Resume audio context if suspended (iOS requirement)
+    if (this.audioContext.state === 'suspended') {
+      this.audioContext.resume().then(() => {
+        this.playBeepInternal(frequency, duration);
+      }).catch(() => {
+        // If resume fails, try anyway
+        this.playBeepInternal(frequency, duration);
+      });
+    } else {
+      this.playBeepInternal(frequency, duration);
+    }
+  }
+  
+  playBeepInternal(frequency = 800, duration = 200) {
+    try {
+      const oscillator = this.audioContext.createOscillator();
+      const gainNode = this.audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(this.audioContext.destination);
+      
+      oscillator.frequency.value = frequency;
+      oscillator.type = 'sine';
+      
+      // Use higher volume for iOS to help bypass mute switch
+      gainNode.gain.setValueAtTime(0.5, this.audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + duration / 1000);
+      
+      oscillator.start(this.audioContext.currentTime);
+      oscillator.stop(this.audioContext.currentTime + duration / 1000);
+    } catch (e) {
+      console.warn('Error playing beep:', e);
+    }
   }
   
   vibrate(pattern = [200]) {
-    if (!this.settings.vibrationEnabled || !navigator.vibrate) return;
-    navigator.vibrate(pattern);
+    if (!this.settings.vibrationEnabled) return;
+    
+    // iOS Safari doesn't support the Vibration API
+    // Check if vibration is available
+    if (navigator.vibrate) {
+      try {
+        navigator.vibrate(pattern);
+      } catch (e) {
+        console.warn('Vibration not supported:', e);
+      }
+    } else {
+      // Vibration not available (e.g., iOS Safari)
+      // Could show visual feedback instead, but for now just silently fail
+      console.log('Vibration API not available on this device');
+    }
   }
   
   async requestNotificationPermission() {
+    // iOS Safari has very limited notification support
+    // Notifications only work when the app is installed as a PWA (added to home screen)
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+    
     if (!('Notification' in window)) {
-      alert('This browser does not support notifications.');
+      if (isIOS && !isStandalone) {
+        alert('Notifications are only available when this app is added to your home screen.\n\nTo add: Tap the Share button, then "Add to Home Screen".');
+      } else {
+        alert('This browser does not support notifications.');
+      }
       return;
     }
     
@@ -185,12 +246,25 @@ class IntervalTimer {
     }
     
     if (Notification.permission !== 'denied') {
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') {
-        // Show message when newly granted
-        this.showNotification('Notifications enabled!', 'You will receive alerts during workouts.');
-        localStorage.setItem('notificationsAlreadyEnabled', 'true');
+      try {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+          // Show message when newly granted
+          this.showNotification('Notifications enabled!', 'You will receive alerts during workouts.');
+          localStorage.setItem('notificationsAlreadyEnabled', 'true');
+        } else if (permission === 'denied' && isIOS && !isStandalone) {
+          // Provide helpful message for iOS users
+          alert('To enable notifications on iOS, please add this app to your home screen first.\n\nTap the Share button, then "Add to Home Screen".');
+        }
+      } catch (e) {
+        console.warn('Error requesting notification permission:', e);
+        if (isIOS && !isStandalone) {
+          alert('Notifications require this app to be added to your home screen.\n\nTap the Share button, then "Add to Home Screen".');
+        }
       }
+    } else if (isIOS && !isStandalone) {
+      // Permission was denied, but provide helpful message
+      alert('To enable notifications on iOS, please add this app to your home screen first.\n\nTap the Share button, then "Add to Home Screen".');
     }
   }
   
@@ -777,9 +851,9 @@ class IntervalTimer {
       const avgVelocity = Math.abs(velocities.reduce((a, b) => a + b, 0) / velocities.length);
       
       // Fast scrolling: snap to 1 minute (60 seconds)
-      if (avgVelocity > 2) return 60;
+      if (avgVelocity > 1) return 60;
       // Medium scrolling: snap to 15 seconds
-      if (avgVelocity > 0.5) return 15;
+      if (avgVelocity > 0.2) return 15;
       // Slow scrolling: snap to 1 second
       return 1;
     };
@@ -973,13 +1047,13 @@ class IntervalTimer {
         // Use defaults on error
         this.workoutTimeValue = 60;
         this.restTimeValue = 60;
-        this.roundsValue = 10;
+        this.roundsValue = 20;
       }
     } else {
       // No saved values, use defaults
       this.workoutTimeValue = 60;
       this.restTimeValue = 60;
-      this.roundsValue = 10;
+      this.roundsValue = 20;
     }
     
     // Always set ruler positions and update displays
@@ -1069,10 +1143,23 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// Resume audio context on user interaction (required by browsers)
+// Resume audio context on user interaction (required by browsers, especially iOS)
 document.addEventListener('click', () => {
-  if (window.timer && window.timer.audioContext && window.timer.audioContext.state === 'suspended') {
-    window.timer.audioContext.resume();
+  if (window.timer && window.timer.audioContext) {
+    if (window.timer.audioContext.state === 'suspended') {
+      window.timer.audioContext.resume().catch(() => {
+        // Ignore errors, will retry on next interaction
+      });
+    }
   }
-}, { once: true });
+}, { once: false }); // Allow multiple clicks to resume if needed
+
+// Also try to resume on touchstart for iOS
+document.addEventListener('touchstart', () => {
+  if (window.timer && window.timer.audioContext && window.timer.audioContext.state === 'suspended') {
+    window.timer.audioContext.resume().catch(() => {
+      // Ignore errors
+    });
+  }
+}, { once: false });
 

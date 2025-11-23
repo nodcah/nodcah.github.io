@@ -5,7 +5,7 @@
   "start_url": "/timer.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#2196F3",
+  "theme_color": "#6366F1",
   "orientation": "portrait",
   "icons": [
     {

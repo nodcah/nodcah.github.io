@@ -6,17 +6,17 @@
 }
 
 :root {
-  --primary-color: #2196F3;
-  --primary-dark: #1976D2;
-  --secondary-color: #757575;
-  --success-color: #4CAF50;
-  --warning-color: #FF9800;
-  --danger-color: #F44336;
-  --background: #f5f5f5;
+  --primary-color: #6366F1;
+  --primary-dark: #4F46E5;
+  --secondary-color: #64748B;
+  --success-color: #10B981;
+  --warning-color: #F59E0B;
+  --danger-color: #EF4444;
+  --background: #F8FAFC;
   --surface: #ffffff;
-  --text-primary: #212121;
-  --text-secondary: #757575;
-  --border-color: #e0e0e0;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --border-color: #E2E8F0;
 }
 
 body {
@@ -27,8 +27,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow-y: auto;
   user-select: none;
   -webkit-user-select: none;
+  height: 100vh;
+  height: -webkit-fill-available;
 }
 
 .container {
@@ -36,10 +39,12 @@ body {
   margin: 0 auto;
   padding: 0;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   background: var(--surface);
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .container > * {
@@ -50,7 +55,7 @@ body {
 header {
   background: var(--primary-color);
   color: white;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,7 +70,7 @@ header {
 }
 
 header h1 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
@@ -100,46 +105,46 @@ header h1 {
 /* Timer Display */
 .timer-display {
   text-align: center;
-  padding: 3rem 1.5rem;
+  padding: 2rem 1.5rem;
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .timer-time {
   font-size: 4rem;
   font-weight: 300;
   line-height: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
 
 .timer-label {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   opacity: 0.9;
   font-weight: 500;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .round-info {
-  font-size: 1rem;
+  font-size: 0.9rem;
   opacity: 0.8;
 }
 
 /* Controls */
 .controls {
   display: flex;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
   justify-content: center;
 }
 
 .btn-primary, .btn-secondary {
   flex: 1;
   max-width: 200px;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: 50px;
@@ -152,12 +157,12 @@ header h1 {
 .btn-primary {
   background: var(--primary-color);
   color: white;
-  box-shadow: 0 4px 6px rgba(33, 150, 243, 0.3);
+  box-shadow: 0 4px 6px rgba(99, 102, 245, 0.3);
 }
 
 .btn-primary:active {
   transform: scale(0.98);
-  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+  box-shadow: 0 2px 4px rgba(99, 102, 245, 0.3);
 }
 
 .btn-primary.running {
@@ -176,26 +181,26 @@ header h1 {
 
 /* Configuration Section */
 .config-section {
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   border-top: 1px solid var(--border-color);
 }
 
 .config-section h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
   color: var(--text-primary);
 }
 
 .config-item {
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .config-item label {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-secondary);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .config-item input[type="text"] {
@@ -267,14 +272,14 @@ input[type="range"]::-moz-range-thumb {
 .ruler-slider-container {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin: 1rem 0;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
 }
 
 .ruler-slider {
   flex: 1;
   position: relative;
-  height: 80px;
+  height: 70px;
   overflow: hidden;
   touch-action: pan-x;
   cursor: grab;
@@ -302,9 +307,10 @@ input[type="range"]::-moz-range-thumb {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 2px;
-  height: 40px;
+  width: 1px;
+  height: 30px;
   background: var(--primary-color);
+  opacity: 0.4;
   transform: translate(-50%, -50%);
   z-index: 10;
   pointer-events: none;
@@ -315,14 +321,16 @@ input[type="range"]::-moz-range-thumb {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 60px;
-  height: 60px;
-  border: 2px solid var(--primary-color);
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--primary-color);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
   pointer-events: none;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
+  opacity: 0.6;
+  box-shadow: 0 0 0 1px rgba(99, 102, 245, 0.1);
 }
 
 .ruler-marks {
@@ -494,6 +502,139 @@ input[type="range"]::-moz-range-thumb {
   
   .container {
     min-height: -webkit-fill-available;
+  }
+}
+
+/* Mobile optimizations for single screen fit */
+@media screen and (max-height: 900px) and (max-width: 600px) {
+  header {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  header h1 {
+    font-size: 1.1rem;
+  }
+  
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .icon-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .timer-display {
+    padding: 1.5rem 1rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .timer-time {
+    font-size: 3rem;
+    margin-bottom: 0.15rem;
+  }
+  
+  .timer-label {
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
+  }
+  
+  .round-info {
+    font-size: 0.85rem;
+  }
+  
+  .controls {
+    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .config-section {
+    padding: 0.75rem 1rem;
+  }
+  
+  .config-section h2 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .config-item {
+    margin-bottom: 1rem;
+  }
+  
+  .config-item label {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .ruler-slider-container {
+    margin: 0.5rem 0;
+    gap: 0.5rem;
+  }
+  
+  .ruler-slider {
+    height: 60px;
+  }
+  
+  .ruler-indicator {
+    height: 25px;
+  }
+  
+  .ruler-slider::before {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .value-display {
+    min-width: 45px;
+    font-size: 0.9rem;
+  }
+  
+  .config-item input[type="text"] {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Make workout name field more compact */
+  .config-item:last-child {
+    margin-bottom: 0.5rem;
+  }
+  
+  .config-item:last-child label {
+    font-size: 0.8rem;
+  }
+}
+
+/* Extra small screens (iPhone SE, etc.) */
+@media screen and (max-height: 700px) and (max-width: 400px) {
+  .timer-time {
+    font-size: 2.5rem;
+  }
+  
+  .timer-display {
+    padding: 1rem 0.75rem;
+  }
+  
+  .ruler-slider {
+    height: 55px;
+  }
+  
+  .ruler-indicator {
+    height: 20px;
+  }
+  
+  .ruler-slider::before {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .config-item {
+    margin-bottom: 0.75rem;
   }
 }
 
